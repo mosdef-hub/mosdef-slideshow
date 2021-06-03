@@ -672,3 +672,13 @@ a:focus {
     Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
     for you.
 */
+
+.impress-enabled .step {
+    margin: 0;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.impress-enabled .step.active {
+    opacity: 1;
+}

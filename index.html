@@ -13,18 +13,25 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
           rel="stylesheet"/>
     <link rel="shortcut icon" href="favicon.ico"/>
+    <style>
+        #undefined {
+            border-top-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border: 2px solid black;
+        }
+    </style>
 </head>
 
 <body class="impress-not-supported">
 
-<!--<div class="fallback-message">-->
-<!--    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified-->
-<!--        version of this presentation.</p>-->
-<!--    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>-->
-<!--</div>-->
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified
+        version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
 
 <div id="impress"
-     data-transition-duration="1000"
+     data-transition-duration="2000"
      data-width="1024"
      data-height="768"
      data-max-scale="3"
@@ -33,20 +40,65 @@
      data-autoplay="7">
 
     <!-- Slide 1   -->
-    <div id="bored" class="step slide" data-x="-1000" data-y="-1500" data-autoplay="10">
-        <q>Welcome to <a href="https://mosdef.org" target="_blank">MoSDeF</a> <b>Slideshow</b> </q>
+    <div id="welcome" class="step" data-x="-1000" data-y="-1500" data-z="100" data-autoplay="10">
+        <h1>Welcome to <a href="https://mosdef.org" target="_blank">MoSDeF</a> <b>Slideshow</b></h1>
     </div>
 
-    <!-- Slide 2   -->
-    <div class="step slide" data-x="1000" data-y="-1500">
-        <q>Wow such <strong>empty</strong>.</q>
+    <div id="here" class="step" data-x="-1000" data-y="-1500" data-z="300" data-autoplay="10">
+        <q>Here we present an overview of MoSDeF Framework capabilities</q>
     </div>
 
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-z="0" data-scale="10">
+    <div id="mbuild" class="step slide" data-x="-1000" data-y="-1500" data-z="300" data-rotate-z="45" data-rotate-y="-45" data-rotate-order="zyx" >
+        <div id="mbuild-container"
+             style="height:100%; background: #F0F0F0; border-bottom-right-radius: 50px; border-top-left-radius: 50px;">
+            <div id="mosdef-title" style="text-align: center; padding: 50px;">
+                <h1>mBuild</h1>
+            </div>
+            <div id="mosdef-float-left" style="padding: 50px;">
+                <div id="mosdef-float-right">
+                    <div id="mol-container" style="width: 300px; height: 300px; float: right">
+                    </div>
+                </div>
+                <ul>
+                    <li id="mosdef-li" style="margin-top: 50px"><h3>Build Molucules</h3></li>
+                    <li style="margin-top: 50px"><h3>After Connectivity</h3></li>
+                    <li style="margin-top: 50px"><h3>Fill a simulation box</h3></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
+</div>
+
 <script src="js/impress.min.js"></script>
+<script src="js/3Dmol-min.js"></script>
 <script>impress().init();</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const molContainer = document.getElementById('mol-container', {
+            id: 'molViewerCanvas',
+        });
+        let config = {backgroundColor: 'radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));'};
+        let viewer = $3Dmol.createViewer(molContainer, config);
+        fetch('benzoic_acid.mol2')
+            .then(response => response.text())
+            .then(data => {
+                const canvas = document.getElementById('undefined');
+                canvas.style.position = 'relative';  // FIXME: the canvas id is always undefined
+                viewer.addModel(data, 'mol2');
+                viewer.setStyle({}, {
+                    stick: {"radius": 0.2, "color": "grey"},
+                    sphere: {"scale": 0.3, "colorscheme": {}},
+                });
+                viewer.zoomTo();
+                viewer.render();
+                viewer.zoom(0.8, 2000);
+            }).catch((e) => {
+            console.log(e)
+        });
+    });
+
+</script>
 </body>
 </html>
