@@ -283,6 +283,11 @@ a:focus {
     transform:         translateZ(50px);
 }
 
+.step h1 {
+    font-size: 50px;
+    margin: 15px;
+}
+
 #title .footnote {
     font-size: 32px;
 }
@@ -672,3 +677,13 @@ a:focus {
     Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
     for you.
 */
+
+.impress-enabled .step {
+    margin: 0;
+    opacity: 0;
+    transition: opacity 100ms;
+}
+
+.impress-enabled .step.active {
+    opacity: 1;
+}
