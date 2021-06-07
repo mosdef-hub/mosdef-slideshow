@@ -77,7 +77,7 @@
         <q>Here we present an overview of MoSDeF Framework capabilities</q>
     </div>
 
-    <div id="mbuild" class="step slide" data-x="0" data-y="0" data-scale="2">
+    <div id="mbuild" class="step slide" style="z-index: 100;" data-x="0" data-y="0" data-scale="2">
         <div class="mosdef-container">
             <div class="mosdef-title" style="text-align: center; padding: 50px;">
                 <h1><u>mBuild</u></h1>
@@ -94,6 +94,7 @@
                 </ul>
             </div>
         </div>
+        <img id="workflow-image" src="images/mosdef-workflow.png" alt="workflow" style="display: none; margin-top: -100px; margin-left: 700px"/>
     </div>
 
     <div id="foyer" class="step slide" data-x="1800" data-y="0" data-scale="2">
@@ -187,7 +188,6 @@
     </div>
     <div id="overview" class="step" data-x="1000" data-y="700" data-scale="4"></div>
 
-
 </div>
 
 <script src="js/impress.min.js"></script>
@@ -230,17 +230,21 @@
 
     rootElement.addEventListener('impress:stepleave', event => {
         const deck = document.querySelectorAll(".impress-enabled .step");
+        const summaryImage = document.getElementById('workflow-image');
         const nextStep = event.detail.next;
         deck.forEach(slide => {
             if(nextStep.id === "overview"){
                 slide.style.opacity = 1;
+                summaryImage.style.display = 'block';
             } else {
                 slide.style.opacity = 0;
+                summaryImage.style.display = 'none';
             }
         });
         nextStep.style.opacity = 1;
     });
     document.addEventListener('DOMContentLoaded', event => {
+        const summaryImage = document.getElementById('workflow-image');
         const body = document.getElementsByTagName('body')[0];
         if(body.className.includes('impress-on-overview')) {
             const deck = document.querySelectorAll(".impress-enabled .step");
@@ -249,6 +253,7 @@
                 slide.style.opacity = 1;
             });
             drawMolecule();
+            summaryImage.style.display = 'block';
         }
 
     });
