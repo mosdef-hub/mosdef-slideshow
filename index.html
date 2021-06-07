@@ -73,7 +73,7 @@
     </div>
 
     <div id="here" class="step" data-x="-1000" data-y="-1000" data-z="1000" data-autoplay="10" data-scale="2">
-        <q>Here we present an overview of MoSDeF Framework capabilities</q>
+        <q>Here we present an overview of  <a href="https://mosdef.org" target="_blank">MoSDeF</a> Framework capabilities</q>
     </div>
 
     <div id="mbuild" class="step slide" style="z-index: 100;" data-x="0" data-y="0" data-scale="2">
@@ -83,7 +83,7 @@
             </div>
             <div class="mosdef-float-left" style="padding: 50px;">
                 <div class="mosdef-float-right">
-                    <div id="mol-container" style="width: 300px; height: 300px; float: right">
+                    <div id="mol-container" style="width: 350px; height: 350px; float: right;">
                     </div>
                 </div>
                 <ul>
@@ -93,7 +93,7 @@
                 </ul>
             </div>
         </div>
-        <img id="workflow-image" src="images/mosdef-workflow.png" width="400" alt="workflow" style="display: none; margin-top: -150px; margin-left: 650px"/>
+        <img id="workflow-image" src="images/mosdef-workflow.png" width="350" alt="workflow" style="display: none; margin-top: -150px; margin-left: 675px"/>
     </div>
 
     <div id="foyer" class="step slide" data-x="1800" data-y="0" data-scale="2">
@@ -208,8 +208,8 @@
                 .then(data => {
                     const canvas = document.getElementById('undefined');
                     canvas.style.position = 'relative';  // FIXME: the canvas id is always undefined
-                    canvas.style.width = '300px';
-                    canvas.style.height = '300px';
+                    canvas.style.width = '350px';
+                    canvas.style.height = '350px';
                     viewer.addModel(data, 'mol2');
                     viewer.setStyle({}, {
                         stick: {"radius": 0.2, "color": "grey"},
