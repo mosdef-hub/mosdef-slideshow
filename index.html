@@ -14,11 +14,10 @@
           rel="stylesheet"/>
     <link rel="shortcut icon" href="favicon.ico"/>
     <style>
-        #undefined {
-            border-top-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-            border: 2px solid black;
-            position: relative;
+        #mol-container > canvas {
+            width: 300px;
+            height: 300px;
+            border: 5px solid black;
         }
 
         .mosdef-container {
@@ -69,11 +68,11 @@
      data-perspective="1000">
 
     <!-- Slide 1   -->
-    <div id="welcome" class="step" data-x="-1000" data-y="-1000" data-z="500" data-autoplay="10" data-scale="2">
+    <div id="welcome" class="step" data-x="-1000" data-y="-1000" data-z="2000" data-autoplay="10" data-scale="2">
         <h1>Welcome to <a href="https://mosdef.org" target="_blank">MoSDeF</a> <b>Slideshow</b></h1>
     </div>
 
-    <div id="here" class="step" data-x="-1000" data-y="-1000" data-z="300" data-autoplay="10" data-scale="2">
+    <div id="here" class="step" data-x="-1000" data-y="-1000" data-z="1000" data-autoplay="10" data-scale="2">
         <q>Here we present an overview of MoSDeF Framework capabilities</q>
     </div>
 
@@ -94,7 +93,7 @@
                 </ul>
             </div>
         </div>
-        <img id="workflow-image" src="images/mosdef-workflow.png" alt="workflow" style="display: none; margin-top: -100px; margin-left: 700px"/>
+        <img id="workflow-image" src="images/mosdef-workflow.png" width="400" alt="workflow" style="display: none; margin-top: -150px; margin-left: 650px"/>
     </div>
 
     <div id="foyer" class="step slide" data-x="1800" data-y="0" data-scale="2">
@@ -113,7 +112,7 @@
         </div>
     </div>
 
-    <div id="gmso" class="step slide" data-x="0" data-y="1400" data-scale="2">
+    <div id="gmso" class="step slide" data-x="1800" data-y="1400" data-scale="2">
         <div class="mosdef-container">
             <div style="padding: 50px; text-align: center">
                 <h1><u>GMSO</u></h1>
@@ -165,8 +164,7 @@
             </div>
         </div>
     </div>
-
-    <div id="simulationEngines" class="step slide" data-x="1800" data-y="1400" data-scale="2">
+    <div id="simulationEngines" class="step slide" data-x="0" data-y="1400" data-scale="2">
         <div class="mosdef-container">
             <div style="padding: 50px; text-align: center">
                 <h1><u>Simulation Engines</u></h1>
@@ -210,6 +208,8 @@
                 .then(data => {
                     const canvas = document.getElementById('undefined');
                     canvas.style.position = 'relative';  // FIXME: the canvas id is always undefined
+                    canvas.style.width = '300px';
+                    canvas.style.height = '300px';
                     viewer.addModel(data, 'mol2');
                     viewer.setStyle({}, {
                         stick: {"radius": 0.2, "color": "grey"},
@@ -248,7 +248,6 @@
         const body = document.getElementsByTagName('body')[0];
         if(body.className.includes('impress-on-overview')) {
             const deck = document.querySelectorAll(".impress-enabled .step");
-            console.log('here');
             deck.forEach(slide => {
                 slide.style.opacity = 1;
             });
