@@ -69,16 +69,15 @@
      data-perspective="1000">
 
     <!-- Slide 1   -->
-    <div id="welcome" class="step" data-x="-1000" data-y="-1500" data-z="100" data-autoplay="10" data-scale="2">
+    <div id="welcome" class="step" data-x="-3000" data-y="-3000" data-z="500" data-autoplay="10" data-scale="2">
         <h1>Welcome to <a href="https://mosdef.org" target="_blank">MoSDeF</a> <b>Slideshow</b></h1>
     </div>
 
-    <div id="here" class="step" data-x="-1000" data-y="-1500" data-z="300" data-autoplay="10" data-scale="2">
+    <div id="here" class="step" data-x="-3000" data-y="-3000" data-z="300" data-autoplay="10" data-scale="2">
         <q>Here we present an overview of MoSDeF Framework capabilities</q>
     </div>
 
-    <div id="mbuild" class="step slide" data-x="0" data-y="-1500" data-z="300" data-rotate-z="45"
-         data-rotate-y="-45" data-rotate-order="zyx" data-scale="2">
+    <div id="mbuild" class="step slide" data-x="0" data-y="0" data-scale="2">
         <div class="mosdef-container">
             <div class="mosdef-title" style="text-align: center; padding: 50px;">
                 <h1><u>mBuild</u></h1>
@@ -97,14 +96,13 @@
         </div>
     </div>
 
-    <div id="foyer" class="step slide" data-x="0" data-y="0" data-z="550" data-rotate-z="45"
-         data-rotate-y="-45" data-rotate-order="yxz" data-scale="2">
+    <div id="foyer" class="step slide" data-x="1800" data-y="0" data-scale="2">
         <div class="mosdef-container" style="text-align: center">
             <div style="padding: 50px;">
                 <h1><u>Foyer</u></h1>
             </div>
             <div class="mosdef-float-right">
-                <img src="images/foyer-molecule.png" width="212" height="305"/>
+                <img src="images/foyer-molecule.png" height="265"/>
                 <img src="images/foyer-smarts.png" width="424" height="265"/>
             </div>
             <ul>
@@ -114,8 +112,7 @@
         </div>
     </div>
 
-    <div id="gmso" class="step slide" data-x="1000" data-y="1000" data-z="550" data-rotate-z="45"
-         data-rotate-y="45" data-rotate-order="yzx" data-scale="2">
+    <div id="gmso" class="step slide" data-x="0" data-y="1400" data-scale="2">
         <div class="mosdef-container">
             <div style="padding: 50px; text-align: center">
                 <h1><u>GMSO</u></h1>
@@ -168,8 +165,7 @@
         </div>
     </div>
 
-    <div id="simulationEngines" class="step slide" data-x="1000" data-y="100" data-z="800" data-rotate-z="45"
-         data-rotate-y="45" data-rotate-order="xzy" data-scale="2">
+    <div id="simulationEngines" class="step slide" data-x="1800" data-y="1400" data-scale="2">
         <div class="mosdef-container">
             <div style="padding: 50px; text-align: center">
                 <h1><u>Simulation Engines</u></h1>
@@ -189,6 +185,7 @@
 
         </div>
     </div>
+    <div id="overview" class="step" data-x="1000" data-y="700" data-scale="4"></div>
 
 
 </div>
@@ -199,9 +196,8 @@
 <script>
     const rootElement = document.getElementById("impress");
     let viewer;
-    rootElement.addEventListener("impress:stepenter", event => {
-        if (event.target.id === "mbuild") {
-            const molContainer = document.getElementById('mol-container', {
+    const drawMolecule = () => {
+        const molContainer = document.getElementById('mol-container', {
                 id: 'molViewerCanvas',
             });
             if (viewer) {
@@ -225,7 +221,36 @@
                 }).catch((e) => {
                 console.log(e)
             });
+    };
+    rootElement.addEventListener("impress:stepenter", event => {
+        if (event.target.id === "mbuild") {
+            drawMolecule();
         }
+    });
+
+    rootElement.addEventListener('impress:stepleave', event => {
+        const deck = document.querySelectorAll(".impress-enabled .step");
+        const nextStep = event.detail.next;
+        deck.forEach(slide => {
+            if(nextStep.id === "overview"){
+                slide.style.opacity = 1;
+            } else {
+                slide.style.opacity = 0;
+            }
+        });
+        nextStep.style.opacity = 1;
+    });
+    document.addEventListener('DOMContentLoaded', event => {
+        const body = document.getElementsByTagName('body')[0];
+        if(body.className.includes('impress-on-overview')) {
+            const deck = document.querySelectorAll(".impress-enabled .step");
+            console.log('here');
+            deck.forEach(slide => {
+                slide.style.opacity = 1;
+            });
+            drawMolecule();
+        }
+
     });
 </script>
 </body>
